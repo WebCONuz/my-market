@@ -7,6 +7,7 @@ import {
   HasMany,
 } from 'sequelize-typescript';
 import { Market } from 'src/market/market.model';
+import { Worker } from '../worker/worker.model';
 import { Product } from 'src/product/product.model';
 
 interface BranchesCreateAttr {
@@ -40,6 +41,9 @@ export class Branch extends Model<Branch, BranchesCreateAttr> {
   @ForeignKey(() => Market)
   @Column({ type: DataType.INTEGER })
   market_id: number;
+
+  @HasMany(() => Worker)
+  workers: Worker[];
 
   @HasMany(() => Product)
   products: Product[];

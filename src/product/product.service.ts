@@ -20,7 +20,7 @@ export class ProductService {
     return this.productRepository.findAll();
   }
 
-  // Get one Peoduct Service
+  // Get one Product Service
   async getOne(id: number) {
     return this.productRepository.findOne({
       where: { id },
@@ -28,7 +28,7 @@ export class ProductService {
     });
   }
 
-  // Update Peoduct Service
+  // Update Product Service
   async update(id: number, updateProductDto: UpdateProductDto) {
     return this.productRepository.update(updateProductDto, {
       where: { id },
@@ -36,7 +36,7 @@ export class ProductService {
     });
   }
 
-  // Delete Peoduct Service
+  // Delete Product Service
   async delete(id: number) {
     return this.productRepository.destroy({ where: { id } });
   }
