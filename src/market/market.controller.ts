@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Param } from '@nestjs/common/decorators';
+import { Controller } from '@nestjs/common';
+import { Delete, Body, Param, Put, Get, Post } from '@nestjs/common/decorators';
 import { CreateMarketDto } from './dto/create-market.dto';
 import { MarketService } from './market.service';
 
@@ -23,5 +23,17 @@ export class MarketController {
   @Get(':id')
   getOne(@Param('id') id: number) {
     return this.marketService.getOne(+id);
+  }
+
+  // Update Market Controller
+  @Put(':id')
+  update(@Param('id') id: number, @Body() updateMarketDto: CreateMarketDto) {
+    return this.marketService.update(+id, updateMarketDto);
+  }
+
+  // Delete Market Controller
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return this.marketService.delete(+id);
   }
 }

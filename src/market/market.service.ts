@@ -20,4 +20,19 @@ export class MarketService {
   async getOne(id: number) {
     return await this.marketReopsitory.findOne({ where: { id } });
   }
+
+  // Update Market Service
+  async update(id: number, updateMarketDto: CreateMarketDto) {
+    return await this.marketReopsitory.update(updateMarketDto, {
+      where: { id },
+      returning: true,
+    });
+  }
+
+  // Delete Market Service
+  async delete(id: number) {
+    return await this.marketReopsitory.destroy({
+      where: { id },
+    });
+  }
 }
