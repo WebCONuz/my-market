@@ -9,6 +9,9 @@ async function bootstrap() {
   // Use Validate
   app.useGlobalPipes(new ValidationPipe());
 
+  // global prefix
+  app.setGlobalPrefix('api');
+
   // Run Project
   const Port = process.env.PORT || 4001;
   await app.listen(Port, () => {
