@@ -1,6 +1,6 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateBranchDto {
+export class UpdateBranchDto {
   @IsString()
   @IsOptional()
   readonly name: string;

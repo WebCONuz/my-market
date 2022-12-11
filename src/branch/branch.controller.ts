@@ -1,6 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { BranchService } from './branch.service';
 import { CreateBranchDto } from './dto/create-branch.dto';
+import { UpdateBranchDto } from './dto/update.branch.dto';
 
 @Controller('branch')
 export class BranchController {
@@ -16,5 +25,23 @@ export class BranchController {
   @Get()
   getAll() {
     return this.branchService.getAll();
+  }
+
+  // Get one Branch by Id Controller
+  @Get(':id')
+  getOne(@Param('id') id: number) {
+    return this.branchService.getOne(+id);
+  }
+
+  // Update Branch Controller
+  @Put(':id')
+  update(@Param('id') id: number, @Body() updateBranchDto: UpdateBranchDto) {
+    return this.branchService.update(+id, updateBranchDto);
+  }
+
+  // Delete Branch Controller
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return this.branchService.delete(+id);
   }
 }
