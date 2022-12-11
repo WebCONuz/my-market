@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, Model, Table, HasMany } from 'sequelize-typescript';
+import { Branch } from 'src/branch/branch.model';
 
 interface MarketCreationAttrs {
   name: string;
@@ -20,4 +21,7 @@ export class Market extends Model<Market, MarketCreationAttrs> {
     allowNull: false,
   })
   name: string;
+
+  @HasMany(() => Branch)
+  branges: Branch[];
 }

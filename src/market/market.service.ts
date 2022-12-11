@@ -11,14 +11,18 @@ export class MarketService {
   async create(createMarketDto: CreateMarketDto) {
     return await this.marketReopsitory.create(createMarketDto);
   }
+
   // Get all markets Service
   async getAll() {
-    return await this.marketReopsitory.findAll();
+    return await this.marketReopsitory.findAll({ include: { all: true } });
   }
 
   // Get one market Service
   async getOne(id: number) {
-    return await this.marketReopsitory.findOne({ where: { id } });
+    return await this.marketReopsitory.findOne({
+      where: { id },
+      include: { all: true },
+    });
   }
 
   // Update Market Service

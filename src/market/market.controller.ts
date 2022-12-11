@@ -1,5 +1,12 @@
-import { Controller } from '@nestjs/common';
-import { Delete, Body, Param, Put, Get, Post } from '@nestjs/common/decorators';
+import {
+  Controller,
+  Delete,
+  Body,
+  Param,
+  Put,
+  Get,
+  Post,
+} from '@nestjs/common';
 import { CreateMarketDto } from './dto/create-market.dto';
 import { MarketService } from './market.service';
 
