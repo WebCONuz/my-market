@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { Branch } from 'src/branch/branch.model';
 import { CreateMarketDto } from './dto/create-market.dto';
 import { Market } from './market.model';
 
 @Injectable()
 export class MarketService {
-  constructor(@InjectModel(Market) private marketReopsitory: typeof Market) {}
+  constructor(
+    @InjectModel(Market) private marketReopsitory: typeof Market,
+    @InjectModel(Branch) private branchRepository: typeof Branch,
+  ) {}
 
   // Create Market Service
   async create(createMarketDto: CreateMarketDto) {
@@ -19,10 +23,14 @@ export class MarketService {
 
   // Get one market Service
   async getOne(id: number) {
-    return await this.marketReopsitory.findOne({
-      where: { id },
+    const market = await this.marketReopsitory.findOne({ where: { id } });
+    const branches = await this.branchRepository.findAll({
+      where: { market_id: market.id },
       include: { all: true },
     });
+
+    let obj: Record<string, any> = { ...market, branches: [...branches] };
+    return { ...obj.dataValues, branches: [...obj.branches] };
   }
 
   // Update Market Service
