@@ -5,6 +5,7 @@ import { BranchModule } from './branch/branch.module';
 import { ProductModule } from './product/product.module';
 import { WorkerModule } from './worker/worker.module';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
     BranchModule,
     ProductModule,
     WorkerModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
