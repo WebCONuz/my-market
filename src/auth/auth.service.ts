@@ -18,13 +18,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  // Get all Admin Service
-  async getAll() {
-    return await this.adminRepository.findAll({ include: { all: true } });
-  }
-
-  // Register Admin Service
-  async registration(registerDto: RegisterDto) {
+  // Register Admin Service ----------------------------------------------------------
+  /* async registration(registerDto: RegisterDto) {
     // Checked new admin
     const admin = await this.adminRepository.findOne({
       where: { email: registerDto.email },
@@ -48,9 +43,9 @@ export class AuthService {
 
     // Generated Tokens
     return this.generateToken(newAdmin);
-  }
+  }  */
 
-  // Login Admin Service
+  // Login Admin Service -------------------------------------------------------------
   async login(loginDto: LoginDto) {
     // Validate admin
     const admin = await this.validateAdmin(loginDto);
@@ -63,13 +58,18 @@ export class AuthService {
     return token;
   }
 
-  // Generated Token Method
+  // Get all Admin Service -----------------------------------------------------------
+  async getAll() {
+    return await this.adminRepository.findAll({ include: { all: true } });
+  }
+
+  // Generated Token Method ----------------------------------------------------------
   private async generateToken(admin: Admin) {
     const payload = { id: admin.id, email: admin.email };
     return { token: this.jwtService.sign(payload) };
   }
 
-  // Validate Token Mothod
+  // Validate Token Mothod -----------------------------------------------------------
   private async validateAdmin(loginDto: LoginDto) {
     const admin = await this.adminRepository.findOne({
       where: { email: loginDto.email },
