@@ -6,7 +6,9 @@ import {
   Put,
   Get,
   Post,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/guards/auth.guard';
 import { CreateMarketDto } from './dto/create-market.dto';
 import { MarketService } from './market.service';
 
@@ -15,6 +17,7 @@ export class MarketController {
   constructor(private readonly marketService: MarketService) {}
 
   // Add Market Controller
+  @UseGuards(JwtAuthGuard)
   @Post()
   createMarket(@Body() createMarketDto: CreateMarketDto) {
     return this.marketService.create(createMarketDto);
@@ -33,12 +36,14 @@ export class MarketController {
   }
 
   // Update Market Controller
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   update(@Param('id') id: number, @Body() updateMarketDto: CreateMarketDto) {
     return this.marketService.update(+id, updateMarketDto);
   }
 
   // Delete Market Controller
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   delete(@Param('id') id: number) {
     return this.marketService.delete(+id);
